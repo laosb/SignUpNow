@@ -5,9 +5,9 @@
       <div class="hola-columns hola-card-stack">
         <div class="hola-columns-item">
           <div class="hola-card about-hero">
-            <img src="@/assets/logo.svg" alt="杭电助手">
+            <img src="@/assets/logo.svg" alt="报名啦">
             <p>
-              <b>杭电助手 PWA 版</b>
+              <b>报名啦 PWA 版</b>
               <br>
               <span>v{{version}}</span>
               <span v-if="$device.iOS"> for iOS</span>
@@ -15,9 +15,9 @@
               <br>
               <template v-if="$store.state.updateAvailable">
                 <br>
-                <b>杭电助手有更新可用！</b>
+                <b>报名啦有更新可用！</b>
                 <br>
-                <span>请关闭所有打开的杭电助手窗口，包括浏览器中打开的杭电助手，再重新打开以完成更新。更新后可以查看更新历史了解更新内容。</span>
+                <span>请关闭所有打开的报名啦窗口，包括浏览器中打开的报名啦，再重新打开以完成更新。更新后可以查看更新历史了解更新内容。</span>
               </template>
             </p>
           </div>

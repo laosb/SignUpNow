@@ -16,7 +16,7 @@ export async function apiGet (url, opts, ...rest) {
     // page.
     if (data.error !== 0) throw new Error(errorStrBuilder({ code: data.error, reason: data.msg }))
     if (!opts || !opts.noPostingInfo) {
-      if (data.isCache) store.commit('postInfo', `由于各种原因，此处部分数据来自于杭电助手的缓存，缓存于 ${(new Date(data.time * 1000)).toLocaleString()}。`)
+      if (data.isCache) store.commit('postInfo', `由于各种原因，此处部分数据来自于报名啦的缓存，缓存于 ${(new Date(data.time * 1000)).toLocaleString()}。`)
     }
     return data
   } catch (e) {
