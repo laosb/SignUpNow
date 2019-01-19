@@ -1,0 +1,45 @@
+{
+  "name": "signupnow",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --modern",
+    "build-legacy": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "fix": "vue-cli-service lint --fix"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "holakit": "^0.23.0-1",
+    "localforage": "^1.7.2",
+    "mobile-detect": "^1.4.3",
+    "register-service-worker": "^1.5.2",
+    "vue": "^2.5.17",
+    "vue-micon": "^1.1.0",
+    "vue-router": "^3.0.1",
+    "vue2-leaflet": "^1.2.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.4",
+    "@vue/cli-plugin-eslint": "^3.0.4",
+    "@vue/cli-plugin-pwa": "^3.0.4",
+    "@vue/cli-service": "^3.0.4",
+    "@vue/eslint-config-standard": "^3.0.4",
+    "babel-plugin-import": "^1.9.1",
+    "html-loader": "^0.5.5",
+    "js-yaml-loader": "^1.0.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "markdown-loader": "^4.0.0",
+    "postcss-import": "^12.0.0",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 11"
+  ],
+  "main": "index.js"
+}

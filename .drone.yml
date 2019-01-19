@@ -1,0 +1,98 @@
+kind: pipeline
+name: build-frontend
+
+workspace:
+  base: /frontend
+  path: fe
+
+steps:
+  - name: build
+    image: node:10.15.0
+    volumes:
+      - name: tempath
+        path: /tempath
+      - name: cache
+        path: /usr/local/share/.cache/yarn/
+      - name: modles
+        path: /frontend/fe/node_modules/
+      - name: pack
+        path: /pack
+    commands:
+      - rm -r /pack/public/*
+      - rm -r /pack/dist/*
+      - yarn
+      - yarn build
+      - cp -r public /pack/
+      - cp -r dist /pack/
+      - cp main.go /pack
+  - name: pack
+    image: golang:1.11.2
+    volumes:
+      - name: gopath
+        path: /gopath
+      - name: backend_bin
+        path: /backend_bin
+      - name: pack
+        path: /pack
+    commands:
+      - export PATH=/gopath/bin:$PATH
+      - export GOPATH="/gopath"
+      - export GOPROXY=https://goproxy.io
+      - go get -u github.com/gobuffalo/packr/packr
+      - cd /pack
+      - packr build -o lemon_app
+  - name: push
+    image: golang:1.11.2
+    volumes:
+      - name: gopath
+        path: /gopath
+      - name: backend_bin
+        path: /backend_bin
+      - name: pack
+        path: /pack
+    commands:
+      - cd /backend_bin
+      - git config --global credential.helper store
+      - git config --global user.email "[REDACTED]"
+      - git config --global user.name "auto_deploy"
+      - git pull origin master
+      - cp /pack/lemon_app /backend_bin/lemon_app
+      - git add .
+      - git commit -m "update lemon_app by auto_deploy"
+      - git push origin master
+  - name: deply
+    image: golang:1.11.2
+    commands:
+      - curl http://ali3.internal.[REDACTED]:13332/deploy/[REDACTED]/lemon_app
+  - name: docker-push
+    image: plugins/docker
+    settings:
+      username: [REDACTED]
+      password: [REDACTED]
+      registry: registry.cn-hangzhou.aliyuncs.com
+      repo: registry.cn-hangzhou.aliyuncs.com/[REDACTED]
+      tags: latest
+volumes:
+- name: tempath
+  host:
+    path: /mnt/lemon_fe/temp
+- name: cache
+  host:
+    path: /mnt/lemon_fe/cache
+- name: modles
+  host:
+    path: /mnt/lemon_fe/modles
+- name: pack
+  host:
+    path: /mnt/lemon_fe/pack
+- name: gopath
+  host:
+    path: /mnt/gopath
+- name: backend_bin
+  host:
+    path: /mnt/backend_bin/master
+
+trigger:
+  branch:
+    - master
+    - pull_request

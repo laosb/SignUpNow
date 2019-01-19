@@ -1,0 +1,10 @@
+.git
+Dockerfile
+.dockerignore
+.DS_Store
+
+node_modules
+npm-debug
+dist
+app
+*.exe

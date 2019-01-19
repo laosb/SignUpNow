@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>play/ic_launcher_APP</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-5.5%" y="-18.4%" width="110.9%" height="142.1%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-5.3%" y="-19.7%" width="110.6%" height="139.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-8.6%" y="-11.0%" width="117.2%" height="122.1%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="play/ic_launcher_APP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-3" transform="translate(-10.000000, 12.000000)" fill="#3498DB" fill-rule="nonzero">
+            <g id="Group-2" transform="translate(243.000000, 262.500000) rotate(-22.000000) translate(-243.000000, -262.500000) translate(67.000000, 51.000000)">
+                <g id="Group" filter="url(#filter-1)" transform="translate(289.047403, 151.773911) rotate(80.000000) translate(-289.047403, -151.773911) translate(142.547403, 113.773911)">
+                    <path d="M37.6068376,2.84217094e-14 L269.302714,2.91629313e-14 L279.758953,1.06352423 C287.247897,1.82523915 292.702289,8.52253882 291.941679,16.0223617 C291.573922,19.6485456 289.773248,22.9768108 286.940821,25.2656701 L272.996561,36.5339023 C267.616557,40.8814349 265.869547,42.1788935 263.792714,43.4844494 C261.715881,44.7900053 259.748408,45.7487577 257.440952,46.5796732 C255.133497,47.4105886 253.03594,47.9865937 246.299876,49.5432405 L134.743623,75.3229376 L37.6068376,75.3229376 C30.68361,75.3229376 24.1973299,73.449425 18.6259466,70.1810431 C13.0545632,66.9126612 8.39807658,62.2494101 5.13443577,56.6699333 C1.87079497,51.0904564 1.9295035e-14,44.5947538 0,37.6614688 C9.00044511e-14,30.7281839 1.87079497,24.2324812 5.13443577,18.6530044 C8.39807658,13.0735275 13.0545632,8.41027641 18.6259466,5.14189453 C24.1973299,1.87351266 30.68361,2.96953332e-14 37.6068376,2.84217094e-14 Z" id="Rectangle-2"></path>
+                </g>
+                <g id="Group" filter="url(#filter-2)" transform="translate(202.260042, 136.409034) rotate(45.000000) translate(-202.260042, -136.409034) translate(61.260042, 98.409034)">
+                    <path d="M37.6068376,2.84217094e-14 L249.137009,1.63503314e-13 L269.443525,0.994013364 C276.671669,1.34783438 282.244825,7.50274385 281.891517,14.7413884 C281.72255,18.2032216 280.192845,21.4575201 277.636359,23.7938207 L266.210864,34.23526 C260.895082,39.093204 259.127615,40.5624272 257.002866,42.051004 C254.878116,43.5395808 252.830026,44.6509443 250.424527,45.6206338 C248.019028,46.5903234 245.824822,47.270838 238.858232,49.0777251 L137.667837,75.3229376 L37.6068376,75.3229376 C30.68361,75.3229376 24.1973299,73.449425 18.6259466,70.1810431 C13.0545632,66.9126612 8.39807658,62.2494101 5.13443577,56.6699333 C1.87079497,51.0904564 6.99691223e-15,44.5947538 0,37.6614688 C2.05291614e-14,30.7281839 1.87079497,24.2324812 5.13443577,18.6530044 C8.39807658,13.0735275 13.0545632,8.41027641 18.6259466,5.14189453 C24.1973299,1.87351266 30.68361,2.96953332e-14 37.6068376,2.84217094e-14 Z" id="Rectangle-2"></path>
+                </g>
+                <g id="Group" filter="url(#filter-3)" transform="translate(0.000000, 150.645875)">
+                    <path d="M213.606838,271.162575 C138.835979,271.162575 78.2222222,210.460765 78.2222222,135.581288 C78.2222222,114.781433 95.0593769,97.9198189 115.82906,97.9198189 C136.598743,97.9198189 153.435897,114.781433 153.435897,135.581288 C153.435897,168.861056 180.375345,195.839638 213.606838,195.839638 C246.83833,195.839638 273.777778,168.861056 273.777778,135.581288 C273.777778,102.30152 246.83833,75.3229376 213.606838,75.3229376 C192.837155,75.3229376 176,58.4613237 176,37.6614688 C176,16.8616139 192.837155,0 213.606838,0 C288.377696,0 348.991453,60.7018102 348.991453,135.581288 C348.991453,210.460765 288.377696,271.162575 213.606838,271.162575 Z" id="Combined-Shape"></path>
+                    <path d="M37.6068376,2.84217094e-14 L221.128205,3.3773726e-14 C241.897888,2.99528547e-14 258.735043,16.8616139 258.735043,37.6614688 C258.735043,58.4613237 241.897888,75.3229376 221.128205,75.3229376 L37.6068376,75.3229376 C16.8371547,75.3229376 2.54355257e-15,58.4613237 0,37.6614688 C-2.54355257e-15,16.8616139 16.8371547,3.75945974e-14 37.6068376,2.84217094e-14 Z" id="Rectangle-2"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

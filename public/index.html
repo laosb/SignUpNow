@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html class="hola-html-reset hola-var" lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#3498db">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>img/icons/apple-touch-icon.png?v=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>img/icons/favicon-32x32.png?v=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>img/icons/favicon-16x16.png?v=1">
+    <link rel="manifest" href="<%= BASE_URL %>manifest.json?v=1.1">
+    <link rel="mask-icon" href="<%= BASE_URL %>img/icons/safari-pinned-tab.svg?v=1" color="#3498db">
+    <link rel="shortcut icon" href="<%= BASE_URL %>img/icons/favicon.ico?v=1">
+    <meta name="apple-mobile-web-app-title" content="杭电助手">
+    <meta name="application-name" content="杭电助手">
+    <meta name="msapplication-TileColor" content="#3498db">
+    <meta name="msapplication-config" content="<%= BASE_URL %>img/icons/browserconfig.xml?v=1">
+    <meta name="theme-color" content="#3498db">
+    <link rel="canonical" href="https://help.hdu.party"/>
+    <title>杭电助手</title>
+    <script>
+      if (document.location.href.match('__shell_cordova')) {
+        const cordovaJs = document.createElement('script')
+        cordovaJs.src = '/cordova.js'
+        document.head.appendChild(cordovaJs)
+
+        window.handleOpenURL = function handleOpenURL (url) {
+          document.location.href = document.location.origin + url.replace('hduhelp://', '/?__shell_cordova/#/')
+        }
+      }
+      window._hduhelpErrorRecover = function _hduhelpErrorRecover (error) {
+        // It's quite normal for Yiban to insert a JS file with error.
+        // Nothing we can do than just disable this error detecting mechanism.
+        if (window.navigator.userAgent.match('yiban')) return 0
+        document.getElementById('hduhelp-error-recover').innerHTML = '' +
+        '<h2>糟糕</h2><h3>杭电助手遇到了一些问题，可能无法正常工作。</h3>' +
+        '<p>您可以点击<a href="/">这里</a>重新载入杭电助手。我们对此造成的不便感到抱歉。</p>' +
+        '<p>如果您可以稳定地造成这个错误，麻烦将技术细节回报给杭电助手开发团队。</p>' +
+        '<details><summary>技术细节</summary><pre><code>' +
+          'UA: ' + window.navigator.userAgent + '\n' +
+          'isAsApp: ' + (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) + '\n' +
+          'ErrMsg: ' + error.message + '\n' +
+          'ErrStack:\n' + error.stack + '\n\n'
+          'ErrObj: ' + JSON.stringify(error) + '\n' +
+        '</code></pre></details>'
+        document.getElementById('hduhelp-error-recover').style = ''
+      }
+      window.onerror = function () { return _hduhelpErrorRecover(arguments[5]) }
+      window.addEventListener('error', _hduhelpErrorRecover)
+    </script>
+    <style>
+        #hduhelp-error-recover {
+          position: fixed;
+          top: 0; left: 0; width: 100vw; height: 100vh;
+          background: #fff; color: #333;
+          z-index: 1000;
+          padding: 3rem;
+        }
+      </style>
+  </head>
+  <body class="hola-body-typography hola-grey-bg">
+    <noscript>
+      <strong>您未开启浏览器的 JavaScript，将无法使用杭电助手。</strong>
+    </noscript>
+    <div id="hduhelp-error-recover" style="display: none;"></div>
+    <div id="app"></div>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=[REDACTED]"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '[REDACTED]');
+    </script>
+  </body>
+</html>
