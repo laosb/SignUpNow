@@ -40,7 +40,7 @@
           'UA: ' + window.navigator.userAgent + '\n' +
           'isAsApp: ' + (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) + '\n' +
           'ErrMsg: ' + error.message + '\n' +
-          'ErrStack:\n' + error.stack + '\n\n'
+          'ErrStack:\n' + error.stack + '\n\n' +
           'ErrObj: ' + JSON.stringify(error) + '\n' +
         '</code></pre></details>'
         document.getElementById('hduhelp-error-recover').style = ''

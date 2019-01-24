@@ -10,7 +10,7 @@ const localStore = createInstance({ name: 'hduHelp' })
 
 export default new Vuex.Store({
   state: {
-    BASE_URL: 'https://api.[REDACTED]/',
+    BASE_URL: 'https://scapi.[REDACTED]/',
     token: null,
     userInfo: null,
     updateAvailable: false,
@@ -19,7 +19,8 @@ export default new Vuex.Store({
       type: null,
       version: '',
       extraInfo: null
-    }
+    },
+    config: {}
   },
   mutations: {
     _setToken (state, token) {
@@ -36,7 +37,10 @@ export default new Vuex.Store({
       state.shell.version = version
       state.shell.extraInfo = extraInfo
     },
-    postInfo (state, info, scope = 'page') {
+    _setConfig (state, { configName, data }) {
+      state.config[configName] = data
+    },
+    postInfo (state, { info, scope = 'page' }) {
       // Page-scope info will be cleared on navigation events.
       // TODO: Allow users manually dismiss global info.
       return state.infoCenter.push({ info, scope })
@@ -55,6 +59,9 @@ export default new Vuex.Store({
         commit('_setToken', token)
         commit('_setUserInfo', userInfo)
       }
+
+      let { data } = await apiGet('/admin/project/type')
+      commit('_setConfig', { configName: 'projectTypes', data })
     },
     async login ({ commit }, token) {
       commit('_setToken', token)
