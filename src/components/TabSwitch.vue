@@ -8,57 +8,57 @@
 </template>
 
 <script>
-  import { find } from 'lodash'
-  export default {
-    name: 'TabSwitch',
-    data () {
-      return {
-        activeTab: '',
-        activeLeftOffset: 0,
-        activeWidth: 0
+import { find } from 'lodash'
+export default {
+  name: 'TabSwitch',
+  data () {
+    return {
+      activeTab: '',
+      activeLeftOffset: 0,
+      activeWidth: 0
+    }
+  },
+  props: {
+    tabs: Array,
+    defaultActiveTab: String
+  },
+  methods: {
+    switchTab (tab) {
+      this.activeTab = tab.id
+      this.updateOffset()
+      this.$emit('tabchange', tab.id)
+    },
+    tabsChange (tabs) {
+      if (tabs.length === 0) return
+      if (this.defaultActiveTab && !find(tabs, { id: this.defaultActiveTab })) {
+        throw new Error('the defaultActive tab does not exist in tabs.')
       }
-    },
-    props: {
-      tabs: Array,
-      defaultActiveTab: String
-    },
-    methods: {
-      switchTab (tab) {
-        this.activeTab = tab.id
-        this.updateOffset()
-        this.$emit('tabchange', tab.id)
-      },
-      tabsChange (tabs) {
-        if (tabs.length === 0) return
-        if (this.defaultActiveTab && !find(netabswVal, { id: this.defaultActiveTab }))
-          throw new Error('the defaultActive tab does not exist in tabs.')
-        this.activeTab = this.activeTab || this.tabs[0].id
-        this.updateOffset()
-      },
-      updateOffset () {
-        let activeTabEl = this.$refs[this.activeTab]
-        console.log(this.activeTab, activeTabEl)
-        if (!activeTabEl) return
-        if (activeTabEl) activeTabEl = activeTabEl[0]
-        this.activeWidth = activeTabEl.offsetWidth
-        this.activeLeftOffset = activeTabEl.offsetLeft
-      }
-    },
-    created() {
-      this.tabsChange(this.tabs)
-    },
-    mounted () {
+      this.activeTab = this.activeTab || this.tabs[0].id
       this.updateOffset()
     },
-    watch: {
-      defaultActiveTab (newVal) {
-        this.switchTab({ id: newVal })
-      },
-      tabs (newVal) {
-        this.tabsChange(newVal)
-      }
+    updateOffset () {
+      let activeTabEl = this.$refs[this.activeTab]
+      if (!activeTabEl) return
+      if (activeTabEl) activeTabEl = activeTabEl[0]
+      this.activeWidth = activeTabEl.offsetWidth
+      this.activeLeftOffset = activeTabEl.offsetLeft
+    }
+  },
+  created () {
+    this.tabsChange(this.tabs)
+  },
+  mounted () {
+    this.updateOffset()
+  },
+  watch: {
+    defaultActiveTab (newVal) {
+      this.switchTab({ id: newVal })
+    },
+    tabs (newVal) {
+      this.tabsChange(newVal)
     }
   }
+}
 </script>
 
 <style scoped>

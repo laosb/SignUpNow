@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     updateOffsetHeight () {
-      this.navOffsetHeight = this.$refs.topnav.clientHeight;
+      this.navOffsetHeight = this.$refs.topnav.clientHeight
     }
   },
   mounted () {
