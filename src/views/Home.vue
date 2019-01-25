@@ -1,8 +1,23 @@
 <template>
   <div class="home">
     <top-nav>
-      <tab-switch :tabs="tabs"></tab-switch>
+      <tab-switch :tabs="tabs" @tabchange="typeChange"></tab-switch>
     </top-nav>
+    <div class="hola-container">
+      <div class="hola-columns hola-card-stack">
+        <div v-if="loading" class="hola-columns-item">
+          <div class="hola-card">
+            <loading-component></loading-component>
+          </div>
+        </div>
+        <event-card
+                v-else
+                v-for="event in events"
+                :key="event.ProjectID"
+                :event="event"
+        ></event-card>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,10 +28,11 @@
 </style>
 
 <script>
-// import { apiGet } from '@/api'
+import { apiGet } from '@/api'
 
 import TopNav from '@/components/TopNav'
 import TabSwitch from '@/components/TabSwitch'
+import EventCard from '@/components/EventCard'
 import LoadingComponent from '@/components/LoadingComponent'
 
 export default {
@@ -24,11 +40,16 @@ export default {
   components: {
     TopNav,
     LoadingComponent,
-    TabSwitch
+    TabSwitch,
+    EventCard
   },
   data () {
     return {
-      tabs: []
+      tabs: [],
+      events: [],
+      currentType: '',
+      loading: true,
+      errorOccurred: false
     }
   },
   async created () {
@@ -41,14 +62,32 @@ export default {
       })
     })
     this.tabs = tabs
+    this.currentType = tabs[0].id
+    this.typeChange(this.currentType)
+  },
+  methods: {
+    async typeChange (type) {
+      let actuallyDone = false
+      let fakeLoadExpired = false
+      this.loading = true
 
-    try {
-    } catch (e) {
-      this.loading = false
-      return (this.errorOccured = true)
+      // Fake long loading time is set here to prevent visual flicking on switching tabs.
+
+      setTimeout(() => {
+        if (actuallyDone) this.loading = false
+        fakeLoadExpired = true
+      }, 250)
+
+      try {
+        const { data } = await apiGet('/projects', { params: { type } })
+        this.events = data
+      } catch (e) {
+        this.loading = false
+        return (this.errorOccurred = true)
+      }
+      actuallyDone = true
+      if (fakeLoadExpired) this.loading = false
     }
-
-    this.loading = false
   }
 }
 </script>
