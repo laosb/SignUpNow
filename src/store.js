@@ -58,20 +58,21 @@ export default new Vuex.Store({
         if (data.isValid === 2) token = data.accessToken // Refresh the token.
         commit('_setToken', token)
         commit('_setUserInfo', userInfo)
-      }
 
-      let { data } = await apiGet('/admin/project/type')
-      commit('_setConfig', { configName: 'projectTypes', data })
+        let { data: projTypeData } = await apiGet('/admin/project/type')
+        commit('_setConfig', { configName: 'projectTypes', data: projTypeData })
+      }
     },
     async login ({ commit }, token) {
       commit('_setToken', token)
       await localStore.setItem('token', token)
-      const { data } = await apiGet('/school/staff/info')
+      const { data } = await apiGet('/user/info')
+      const rawUser = data.info
       const userInfo = {
-        id: data.STAFFID,
-        name: data.STAFFNAME,
-        unit: data.UNITCODE,
-        type: data.STAFFTYPE
+        id: rawUser.StaffId,
+        name: rawUser.StaffName,
+        unit: rawUser.SchoolId,
+        type: rawUser.StaffType
       }
       commit('_setUserInfo', userInfo)
       await localStore.setItem('userInfo', userInfo)

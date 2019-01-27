@@ -7,15 +7,13 @@ const baseUrl = document.location.href.match('__shell_cordova')
 
 export const getProvidersByEnv = env => {
   let providers = [
-    'weixin',
-    'school',
-    'yiban'
+    'school'
   ]
-  // In Mini Program we will not be able to use other methods involves 3rd pages.
-  // And wxApp login can only be done in Mini Program.
-  if (env === 'wxApp') return ['wxApp']
-  if (env === 'weixin') providers.push('weixin')
-  // Add more env-limitations here.
+  // // In Mini Program we will not be able to use other methods involves 3rd pages.
+  // // And wxApp login can only be done in Mini Program.
+  // if (env === 'wxApp') return ['wxApp']
+  // if (env === 'weixin') providers.push('weixin')
+  // // Add more env-limitations here.
   return providers
 }
 

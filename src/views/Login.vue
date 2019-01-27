@@ -15,11 +15,6 @@
       </template>
       <p v-if="Object.keys(loginUrls) <= 0">请稍等...</p>
     </template>
-    <template v-else-if="$route.query.code && ($route.query.code === '40198')">
-      <p>您还未将您的微信与数字杭电绑定，将无法使用报名啦。</p>
-      <p>您可以点击下面的按钮绑定数字杭电账号。</p>
-      <a :href="urlToStartWeixinBinding" class="hola-button hola-button-primary">数字杭电登录</a>
-    </template>
     <template v-else-if="!$route.query.logout">
       <p>欢迎使用报名啦</p>
       <p>我们正在为您的使用做一些准备...</p>
