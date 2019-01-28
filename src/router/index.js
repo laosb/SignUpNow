@@ -16,6 +16,11 @@ const router = new Router({
       component: () => import('@/views/Home')
     },
     {
+      path: '/projects/:projId',
+      name: 'project_view',
+      component: () => import('@/views/Projects/ProjectView')
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/Login')

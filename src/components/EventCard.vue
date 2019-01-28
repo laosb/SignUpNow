@@ -1,6 +1,6 @@
 <template>
-  <div class="hola-columns-item">
-    <div class="hola-card event-card">
+  <router-link :to="{ name:'project_view', params: { projId: event.ProjectID } }" class="hola-columns-item">
+    <div :class="`hola-card event-card ${ghostCard ? 'hola-card-ghost' : '' }`">
       <img src="@/assets/logo.svg" :alt="event.Name" class="event-logo">
       <div class="details">
         <p><b>{{event.Name}}</b></p>
@@ -13,16 +13,18 @@
           <span v-if="event.NeedCheckIn" class="hola-badge">需签到</span>
           <span v-if="event.NeedSchedule" class="hola-badge">需课表</span>
         </p>
+        <slot></slot>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
   export default {
     name: 'EventCard',
     props: {
-      event: Object
+      event: Object,
+      ghostCard: { type: Boolean, default: false }
     },
     computed: {
       readableType () {
@@ -33,6 +35,9 @@
 </script>
 
 <style scoped>
+  .hola-columns-item, .hola-columns-item * {
+    text-decoration: none;
+  }
   .event-card {
     display: flex;
   }
@@ -45,5 +50,9 @@
   }
   .details p {
     margin-bottom: .1em;
+  }
+  .hola-card-ghost {
+    background: transparent;
+    box-shadow: none;
   }
 </style>
