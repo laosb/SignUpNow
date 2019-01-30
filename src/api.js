@@ -40,6 +40,16 @@ export async function apiGet (url, opts, ...rest) {
   }
 }
 
+export async function apiPost (url, params) {
+  try {
+    const { data } = await axios.post(url, params)
+    if (data.error !== 0) throw new Error(`错误代码 ${data.error}：${data.msg}`)
+    return data
+  } catch (e) {
+    store.commit('postInfo', `发生错误：${e.message}`)
+  }
+}
+
 export async function apiDelete (url, params) {
   const { data } = await axios.delete(url, { params })
   if (data.error !== 0) throw new Error(`错误代码 ${data.error}：${data.msg}`)

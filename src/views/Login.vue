@@ -2,18 +2,30 @@
   <div class="login-page">
     <img src="@/assets/logo.svg" alt="HDUHelp" class="logo">
     <template v-if="!$store.state.userInfo && !$route.query.auth && !$route.query.code && !$route.query.logout">
-      <template v-for="(loginUrl, provider) in loginUrls">
-        <!-- TODO: Make sure we can specify default login provider in different env -->
-        <a
-                v-if="loginUrl" :href="loginUrl"
-                :class="`hola-button ${provider === 'school'
+      <template v-if="$route.query.alt">
+        <template v-for="(loginUrl, provider) in loginUrls">
+          <!-- TODO: Make sure we can specify default login provider in different env -->
+          <a
+                  v-if="loginUrl" :href="loginUrl"
+                  :class="`hola-button ${provider === 'school'
                   ? 'hola-button-primary'
                   : 'hola-button-normal'}`"
-                :key="provider"
-                @click="tryLogin"
-        >{{providerDisplay[provider]}}登录</a>
+                  :key="provider"
+                  @click="tryLogin"
+          >{{providerDisplay[provider]}}登录</a>
+        </template>
+        <p v-if="Object.keys(loginUrls) <= 0">请稍等...</p>
+        <p><router-link :to="{ name: 'login' }">直接登录</router-link></p>
       </template>
-      <p v-if="Object.keys(loginUrls) <= 0">请稍等...</p>
+      <template v-else>
+        <form @submit.prevent="loginSubmit">
+          <p><input type="text" class="hola-form-ctrl hola-input-singleline" placeholder="账号" name="account"></p>
+          <p><input type="password" class="hola-form-ctrl hola-input-singleline" placeholder="密码" name="password"></p>
+          <p><input type="submit" class="hola-button hola-button-primary" value="登录"></p>
+        </form>
+        <br>
+        <p><router-link :to="{ name: 'login', query: { alt: 1 } }">第三方授权登录</router-link></p>
+      </template>
     </template>
     <template v-else-if="!$route.query.logout">
       <p>欢迎使用报名啦</p>
@@ -37,11 +49,14 @@
     background: #fff;
     text-align: center;
   }
+  form {
+    text-align: center;
+  }
   .logo {
     margin: 15vh 0;
     height: 32vh;
   }
-  .hola-button {
+  .hola-button:not(input) {
     display: block;
     margin: 1em 30vw;
   }
@@ -52,6 +67,7 @@
   }
 </style>
 <script>
+  import { apiPost } from '@/api'
 import { getProvidersByEnv, getLoginUrl, getWeixinBindUrl } from '@/utils/login'
 
 export default {
@@ -100,6 +116,15 @@ export default {
     }
   },
   methods: {
+    async loginSubmit (event) {
+      const { account, password } = event.target.elements
+      const { data } = await apiPost('/login/cas', {
+        appName: 'SignUpNow',
+        user: account.value,
+        pass: btoa(password.value)
+      })
+      return this.$store.dispatch('login', data.access_token)
+    },
     tryLogin (event) {
       if (this.$device.iOS) {
         // On iOS if we redirected to external link, the callback would never come back into PWA.
