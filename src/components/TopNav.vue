@@ -51,7 +51,8 @@
 export default {
   data () {
     return {
-      navOffsetHeight: 48
+      navOffsetHeight: 48,
+      intervalHandle: null,
     }
   },
   props: {
@@ -60,11 +61,16 @@ export default {
   },
   methods: {
     updateOffsetHeight () {
-      this.navOffsetHeight = this.$refs.topnav.clientHeight
+      this.navOffsetHeight = this.$refs.topnav.offsetHeight
     }
   },
   mounted () {
     this.updateOffsetHeight()
+    setTimeout(() => this.updateOffsetHeight(), 200)
+    this.intervalHandle = setInterval(() => this.updateOffsetHeight(), 5000)
+  },
+  beforeDestroy () {
+    clearInterval(this.intervalHandle)
   }
 }
 </script>

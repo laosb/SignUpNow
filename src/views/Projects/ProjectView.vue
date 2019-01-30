@@ -1,20 +1,23 @@
 <template>
   <div>
-    <top-nav :title="project.Name"></top-nav>
+    <top-nav :title="project.Name || ''" :show-back="true"></top-nav>
     <div class="hola-hero hola-hero-dark-bg hola-hero-colored hola-hero-height-extended home-hero">
       <div class="hola-container hola-hero-content">
-        <event-card ghost-card :event="project">
+        <event-card v-if="project" ghost-card :event="project">
           <template v-if="hasDepts">
-            <p>{{desc}}</p>
+            <p>{{project.Desc}}</p>
+          </template>
+          <template v-else>
+            <p><button class="hola-button hola-button-ghost">现在报名</button></p>
           </template>
         </event-card>
       </div>
     </div>
     <div class="hola-container">
-      <div v-if="hasDepts" class="hola-columns hola-card-stack">
-        <div v-for="deptInst in dept" key="deptInst.DeptID" class="hola-columns-item">
-          <div class="hola-card">
-            <img src="@/assets/logo.svg" :alt="event.Name" class="dept-logo">
+      <div v-if="project" class="hola-columns hola-card-stack">
+        <div v-if="hasDepts" v-for="deptInst in dept" :key="deptInst.DeptID" class="hola-columns-item">
+          <div class="hola-card dept-card">
+            <img src="@/assets/logo.svg" :alt="deptInst.Name" class="dept-logo">
             <div class="details">
               <p><b>{{deptInst.Name}}</b></p>
               <p v-if="deptInst.Desc">{{deptInst.Desc}}</p>
@@ -27,6 +30,9 @@
             </div>
           </div>
         </div>
+        <div v-else class="hola-columns-item">
+          <div class="hola-card">{{project.Desc}}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -36,12 +42,14 @@
   import { apiGet } from '@/api'
   import TopNav from '@/components/TopNav'
   import EventCard from '@/components/EventCard'
+  import LoadingComponent from '@/components/LoadingComponent'
 
   export default {
     name: 'ProjectView',
     components: {
       TopNav,
-      EventCard
+      EventCard,
+      LoadingComponent
     },
     data () {
       return {
@@ -50,7 +58,7 @@
       }
     },
     async created () {
-      const { data } = await apiGet('/project', { params: { ProjectID: this.$route.params.projId } })
+      const { data } = await apiGet('/project', { params: { projectID: this.$route.params.projId } })
       this.project = data.project
       this.dept = data.dept
     },
@@ -63,5 +71,17 @@
 </script>
 
 <style scoped>
-
+  .dept-card {
+    display: flex;
+  }
+  .dept-logo {
+    width: 100px;
+    height: 100px;
+  }
+  .details {
+    flex-grow: 1;
+  }
+  .details p {
+    margin-bottom: .1em;
+  }
 </style>

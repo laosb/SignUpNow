@@ -36,6 +36,7 @@
 
 <style scoped>
   .hola-columns-item, .hola-columns-item * {
+    color: inherit;
     text-decoration: none;
   }
   .event-card {
